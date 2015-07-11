@@ -16,7 +16,7 @@ def profile(request):
 			profiledata=get_object_or_404(ProfileData,user=request.user)
 		except(Http404):
 			return HttpResponseRedirect('./complete')
-		return render(request,'logapp/profile.html',)
+		return render(request,'logapp/profile.html',{'profile':profiledata})
 	else:
 		request.session['state']="Please Log In below"
 		username=''
@@ -68,5 +68,42 @@ def password_change(request):
 
 def profile_edit(request):
 	profiledata=get_object_or_404(ProfileData,user=request.user)
-	return render(request,'logapp/profile_edit.html',{'profile':profiledata})
-#def password_change_submit(request):
+	form=ProfileForm()
+	return render(request,'logapp/profile_edit.html',{'profile':profiledata,'form':form})
+
+def profile_edit_submit(request):
+	try:
+		profiledata=get_object_or_404(ProfileData,user=request.user)
+		if request.POST['branch']=="":
+			return HttpResponseRedirect("../../")
+		else:
+			profiledata.branch=request.POST['branch']
+			profiledata.save()
+			return HttpResponseRedirect("../../")
+	except(Http404):
+		return HttpResponseRedirect("../../../login")
+
+def password_change_submit(request):
+	if(request.method=="POST"):
+		
+		try:
+			if(request.POST['newpassword']!=request.POST['newpassword2']):
+				messages.add_message(request,messages.ERROR,'Password and Confirm Password Don\'t Match ')
+				return HttpResponseRedirect("../")
+			user=authenticate(username=request.user.username,password=request.POST['oldpassword'])
+			if user is not None:
+				#if hash(request.POST['oldpassword'])==request.user.password:
+				#request.user.password=hash(request.POST['newpassword'])
+				user.set_password(request.POST['newpassword'])
+				user.save()
+				login(request,user)
+				#request.user.save()
+				return HttpResponseRedirect("../../../")
+			else:
+				messages.add_message(request,messages.ERROR,'Incorrect Password')
+				return HttpResponseRedirect("../")
+		except(Http404):
+			return HttpResponseRedirect("../../../../login")
+
+	else:
+		return HttpResponseRedirect("../../../../profile")

@@ -6,8 +6,19 @@ EDIT YOUR PROFILE
 </head>
 
 <body>
-
+<form action="./submit/" method="POST">
+{% csrf_token %}
+<table>
+<tr><td>
 {{ profile.branch }}
+<td/><td>
+{{ form.branch }}
+<td/><tr/>
+</table>
+
+<button type="submit"> CHANGE </button>
+
+</form>
 
 
 </body>
