@@ -1,0 +1,62 @@
+#cover
+{
+    position: relative;
+    width: 80%;
+    height:300px;
+    margin-left: 10%;
+    border: dotted;
+}
+
+#profile
+{
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10%;
+    width: 13%;
+    height: 200px;
+    border: dotted;
+
+}
+
+#details
+{
+    position: relative;
+    margin-top: -200px;
+    margin-left: 24%;
+    width: 40%;
+    height: 200px;
+    border: dotted;     
+}
+
+#details2
+{
+    position: relative;
+    margin-top: -200px;
+    margin-left: 65%;
+    width: 25%;
+    height: 200px;
+    border: dotted;     
+}
+
+#about
+{
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10%;
+    width: 39.5%;
+    height: 200px;
+    border: dotted;     
+}
+
+#contact
+{
+    position: relative;
+    margin-top: -200px;
+    margin-left: 50.5%;
+    float:left;
+    width: 39.5%;
+    height: 200px;
+    border: dotted;     
+}
+
+

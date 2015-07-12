@@ -1,0 +1,45 @@
+<html>
+<head>
+
+</head>
+
+
+<body>
+WELCOME TO PROFILE PAGE..
+
+{% if messages %}
+<ul class="messages">
+        {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >
+                        {{ message }}
+                </li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<br/>
+SUCCESSFULLYLOGGED IN..
+<br/>
+USERNAME : {{request.session.username}}
+<br/>
+BRANCH : 
+{{ profile.branch }}
+<br/>
+ENROLLMENT NO. :
+{{ profile.enrollment }}
+<br/>
+ADDRESS :
+{{ profile.address }}
+</br>
+
+<a href="./edit">EDIT YOUR PROFILE</a>
+<br/>
+<a href="./edit/password">CHANGE YOUR PASSWORD</a>
+<br/>
+<a href="../logout">LOGOUT</a>
+
+</body>
+
+
+
+</html>

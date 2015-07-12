@@ -19,7 +19,7 @@ def log_in(request):
 		return HttpResponseRedirect('../profile/')
 		#return render(request,'logapp/profile.html',)
 	else:
-		messages.add_message(request,messages.SUCCESS,'Please Log In Below')
+		messages.add_message(request,messages.INFO,'Please Log In Below')
 		#request.session['state']="Please Log In Below"
 		return render(request,'logapp/login.html',)
 

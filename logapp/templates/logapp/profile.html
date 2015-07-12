@@ -1,45 +1,108 @@
 <html>
 <head>
-
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/profile.css">
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/header.css">
+<title>
+	PROFILE PAGE
+</title>
 </head>
 
-
 <body>
-WELCOME TO PROFILE PAGE..
+	
+	<header>	
+    	<div id="logo" style="">
+        <a href="../welcome">
+        <img src="/static/logapp/images/logo.gif" alt="logo"/>
+		</a>
+		</div>
+        
+		<div id="head">
+		<h1>@ :: WELCOME TO NIKHIL's NETWORK :: @</h1>
+		</div>
+		
+		<div id="user">
 
-{% if messages %}
-<ul class="messages">
-        {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >
-                        {{ message }}
-                </li>
-        {% endfor %}
-</ul>
-{% endif %}
+			<div id="username">
+			<b id="usernameb	">	Welcome,<br/>
+			{{ request.session.username }}
+			</b>
 
-<br/>
-SUCCESSFULLYLOGGED IN..
-<br/>
-USERNAME : {{request.session.username}}
-<br/>
-BRANCH : 
-{{ profile.branch }}
-<br/>
-ENROLLMENT NO. :
-{{ profile.enrollment }}
-<br/>
-ADDRESS :
-{{ profile.address }}
-</br>
+			<div id="settings">
+        	<div class="wrapper">
+            	<div class="content">
+               	 <ul>
+               	     <a href="./edit"><li>Edit Profile</li></a>
+               	     <a href="./edit/password"><li>Change Password</li></a>
+               	     <a href="../logout"><li>Log Out</li></a>
+               	 </ul>
+            	</div>
 
-<a href="./edit">EDIT YOUR PROFILE</a>
-<br/>
-<a href="./edit/password">CHANGE YOUR PASSWORD</a>
-<br/>
-<a href="../logout">LOGOUT</a>
+        	<div class="parent">Settings</div>
+        	</div>
+    		</div>
 
+	    	</div>
+    </header>
+	
+	<div id="content">
+
+		<div id="title">
+			<h3>WELCOME TO YOUR PROFILE PAGE</h3>
+				</div>
+		
+		<div id="notice">
+			{% if messages %}
+				<ul class="messages">
+			    	    {% for message in messages %}
+			        	        <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >
+			            	            {{ message }}
+			                	</li>
+			        	{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+
+		<div id="cover">
+		</div>
+
+		<div id="profile">
+		</div>
+		
+		<div id="details">
+		<b>Name : </b>{{ request.user.first_name }} {{ request.user.last_name }}
+		<BR/>
+		<b>Branch : </b>{{ profile.branch }}
+		<BR/>
+		<b>Enrollment No. : </b>{{ profile.enrollment }}
+		<br/>
+		<b>Gender : </b>{{ profile.gender }}
+		</div>
+		
+		<div id="details2">
+		<b>Birthday : </b>{{ profile.dob }}
+		<BR/>
+		</div>
+
+		<div id="about">
+		<b><u>About Me</u></b><br/>
+		{{ profile.about }}
+		</div>
+
+		<div id="contact">
+		<b><u>Contact Details</u><br/>
+		</b>
+		<b>Email-Id : </b>{{ profile.email }}
+		<BR/>
+		<b>Mobile No. : </b>{{ profile.contact }}
+		<BR/>
+		<b>Address : </b>	{{ profile.address }}
+		</div>
+
+	</div>
+
+	<div id="footer">
+	<h3> &copy Copyright | 2015</h3>
+	</div>
 </body>
-
-
-
 </html>

@@ -1,0 +1,29 @@
+#login {
+position: relative;
+top: 0px;
+height: 100px;
+margin-left:50%-225px;
+display: inline-block;
+padding-top: 10px;
+}
+#title
+{
+position: relative;
+width:100%;
+height: 110px;
+padding: 25px;
+text-align: center;
+border: double;
+font-variant: Sawasdee;
+font-weight: bold;
+}
+
+#submitb
+{
+	text-align: center;
+}
+
+error
+{
+font-color:red;
+}

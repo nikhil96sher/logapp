@@ -1,31 +1,80 @@
 <html>
 <head>
+
+
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/header.css">
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/login.css">
+
 <title>
 Log In
 </title>
+
+
 </head>
 
 <body>
-{% if messages %}
-<ul class="messages">
-	{% for message in messages %}
-		<li {% if message.tags %} class="{{ message.tags }}"{% endif %} >
-			{{ message }}
-		</li>
-	{% endfor %}
-</ul>
-{% endif %}
 
+<header>	
+    	<div id="logo" style="">
+        <a href="../welcome">
+        <img src="/static/logapp/images/logo.gif" alt="logo"/>
+		</a>
+		</div>
+        
+		<div id="head">
+		<h1>@ :: WELCOME TO NIKHIL's NETWORK :: @</h1>
+		</div>
+		
+		<div id="logo" style="">
+        <a href="../welcome">
+        <img src="/static/logapp/images/logo.gif" alt="logo"/>
+		</a>
+		</div>
+        
+</header>
+	
+<div id="content">
+<br/>
+<div id="notice">	
+{% if messages %}
+	{% for message in messages %}
+		<p {% if message.tags %} class="{{ message.tags }}"{% endif %} >
+			{{ message }}
+		</p>
+		
+	{% endfor %}
+{% endif %}
+</div>
+
+<br/>
 <form action="../profile/" method="POST">
 {% csrf_token %}
-Username :
-<input type=text name='username' id='username'></input>
-<br/>
-Password : 
-<input type=password name='password' id='password'></input>
 
+<table id="login">
+
+<tr><td>
+Username
+</td><td>
+<input type=text name='username' id='theusername'></input>
+</td></tr>
+
+<tr><td>
+Password
+</td><td> 
+<input type=password name='password' id='thepassword'></input>
+</td></tr>
+
+<tr><td>
+</td><td id="submitb">
 <button type="submit">LOG IN</button>
-</form>
+</td></tr>
 
+</table>
+
+</form>
+<div id="footer">
+	<h3> &copy Copyright | 2015</h3>
+	</div>
 <body>
 </html>
