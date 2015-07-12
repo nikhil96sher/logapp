@@ -9,42 +9,19 @@ SIGNUP
 
 <form action='../register/' method="POST">
 {% csrf_token %}
-<table>
-<tr>
-{{ request.session.signupstate }}
-<tr/>
+{% if messages %}
+<ul class="messages">
+        {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >
+                        {{ message }}
+                </li>
+        {% endfor %}
+</ul>
+{% endif %}
 
-<tr><td>
-Username 
-<td/><td>
-{{ form.username }}
-<td/><tr/>
+{{ form }}
 
-<tr><td>
-First Name 
-<td/><td>
-{{ form.first_name }}
-<td/><tr/>
 
-<tr><td>
-Last Name
-<td/><td>
-{{ form.last_name }}
-<td/><tr/>
-
-<tr><td>
-Password
-<td/><td>
-{{ form.password }}
-<td/><tr/>
-
-<tr><td>
-E-mail
-<td/><td>
-{{ form.email }}
-<td/><tr/>
-
-<table/>
 
 <button type=submit value="Sign Up">SIGN UP</button>
 </form>

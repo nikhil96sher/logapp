@@ -6,8 +6,6 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from logapp.forms import ProfileForm
 from logapp.models import ProfileData
-# Create your views here.
-
 
 def profile(request):
 	if request.user.is_authenticated():
@@ -39,65 +37,93 @@ def profile(request):
 					request.session['state']="Your account is not active"
 			else:
 				messages.add_message(request,messages.ERROR,'Incorrect Login Credentials')
-				#request.session['state']="Incorrect login credentials"
 				return HttpResponseRedirect('../login/')
 		
 		
 		return HttpResponseRedirect('../login/')
 
-
-def complete(request):
-	try:
-		profiledata=get_object_or_404(ProfileData,user=request.user)
-		return HttpResponseRedirect('../welcome')
-	except(Http404):
-		form=ProfileForm()
-		return render(request,'logapp/complete.html',{'form':form})
-
-
-def submit_profile(request):
-	form=ProfileForm(request.POST)
-	if form.is_valid():
-		new_profile=ProfileData.objects.create(user=request.user,branch=request.POST['branch'],enrollment=request.POST['enrollment'],gender=request.POST['gender'],dob=request.POST['dob'],email=request.POST['email'],contact=request.POST['contact'],address=request.POST['address'],about=request.POST['about'])
-		return HttpResponseRedirect('../../../welcome')	
+def profile_complete(request):
+	if request.method=="POST":
+		form=ProfileForm(request.POST)
+		if form.is_valid():
+			new_profile=ProfileData.objects.create(user=request.user,branch=request.POST['branch'],enrollment=request.POST['enrollment'],gender=request.POST['gender'],dob=request.POST['dob_year']+'-'+request.POST['dob_month']+'-'+request.POST['dob_day'],email=request.POST['email'],contact=request.POST['contact'],address=request.POST['address'],about=request.POST['about'])
+			return HttpResponseRedirect('../../welcome')	
+		else:
+			return render(request,'logapp/complete.html',{'form':form})
 	else:
-		return HttpResponseRedirect('../../complete')
+		try:
+			profiledata=get_object_or_404(ProfileData,user=request.user)
+			return HttpResponseRedirect('../welcome')
+		except(Http404):
+			form=ProfileForm()
+			return render(request,'logapp/complete.html',{'form':form})
 
-def password_change(request):
-	return render(request,'logapp/password.html',)
+def profile_complete_submit(request):
+	if request.method=="POST":
+		form=ProfileForm(request.POST)
+		if form.is_valid():
+			new_profile=ProfileData.objects.create(user=request.user,branch=request.POST['branch'],enrollment=request.POST['enrollment'],gender=request.POST['gender'],dob=form.dob,email=request.POST['email'],contact=request.POST['contact'],address=request.POST['address'],about=request.POST['about'])
+			return HttpResponseRedirect('../../../welcome')	
+		else:
+			return 
+			return HttpResponseRedirect('../../complete')
+	else:
+		return HttpResponseRedirect('../../../profile')	
 
 def profile_edit(request):
-	profiledata=get_object_or_404(ProfileData,user=request.user)
-	form=ProfileForm()
-	return render(request,'logapp/profile_edit.html',{'profile':profiledata,'form':form})
+	if request.user.is_authenticated():
+		profiledata=get_object_or_404(ProfileData,user=request.user)
+		form=ProfileForm()
+		return render(request,'logapp/profile_edit.html',{'profile':profiledata,'form':form})
+	else:
+		return HttpResponseRedirect('../../login')
 
 def profile_edit_submit(request):
-	try:
-		profiledata=get_object_or_404(ProfileData,user=request.user)
-		if request.POST['branch']=="":
+	if request.method=="POST" and request.user.is_authenticated():
+		try:
+			profiledata=get_object_or_404(ProfileData,user=request.user)
+			
+			if request.POST['branch']!="":
+				profiledata.branch=request.POST['branch']
+			'''if request.POST['enrollment']!="":
+				profiledata.enrollment=request.POST['enrollment']
+			if request.POST['gender']!="":
+				profiledata.gender=request.POST['gender']
+			if request.POST['dob']!="":
+				profiledata.dob=request.POST['dob']
+			if request.POST['email']!="":
+				profiledata.email=request.POST['email']
+			if request.POST['contact']!="":
+				profiledata.contact=request.POST['contact']
+			if request.POST['address']!="":
+				profiledata.address=request.POST['address']
+			if request.POST['about']!="":
+				profiledata.about=request.POST['about']
+			'''
+			profiledata.save()	
+			messages.add_message(request,messages.SUCCESS,'Profile Successfully Updated')
 			return HttpResponseRedirect("../../")
-		else:
-			profiledata.branch=request.POST['branch']
-			profiledata.save()
-			return HttpResponseRedirect("../../")
-	except(Http404):
-		return HttpResponseRedirect("../../../login")
+		except(Http404):
+			return HttpResponseRedirect("../../../login")
+	else:
+		return HttpResponseRedirect('../../../login')
 
+def password_change(request):
+	if request.user.is_authenticated():
+		return render(request,'logapp/password.html',)
+	else:
+		return HttpResponseRedirect('../../../login')
 def password_change_submit(request):
-	if(request.method=="POST"):
-		
+	if(request.method=="POST") and request.user.is_authenticated():	
 		try:
 			if(request.POST['newpassword']!=request.POST['newpassword2']):
 				messages.add_message(request,messages.ERROR,'Password and Confirm Password Don\'t Match ')
 				return HttpResponseRedirect("../")
 			user=authenticate(username=request.user.username,password=request.POST['oldpassword'])
 			if user is not None:
-				#if hash(request.POST['oldpassword'])==request.user.password:
-				#request.user.password=hash(request.POST['newpassword'])
 				user.set_password(request.POST['newpassword'])
 				user.save()
 				login(request,user)
-				#request.user.save()
 				return HttpResponseRedirect("../../../")
 			else:
 				messages.add_message(request,messages.ERROR,'Incorrect Password')
