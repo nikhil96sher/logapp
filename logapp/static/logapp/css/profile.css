@@ -1,10 +1,29 @@
-#cover
+#changecover
+{
+	position: absolute;
+	float: right;
+	z-index: 5;
+	margin-top: 250px;
+	margin-left: 575px;
+}
+
+#changeprofile
+{
+	position: absolute;
+	float: right;
+	z-index: 5;
+	margin-top: 170px;
+	margin-left: 0px;
+}
+
+#mycover
 {
     position: relative;
     width: 80%;
     height:300px;
     margin-left: 10%;
     border: dotted;
+    z-index: 3;
 }
 
 #profile
@@ -58,5 +77,3 @@
     height: 200px;
     border: dotted;     
 }
-
-

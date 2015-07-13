@@ -5,7 +5,7 @@ from logapp.forms import UserForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from logapp.forms import ProfileForm
-from logapp.models import ProfileData
+from logapp.models import ProfileData,Uploads
 
 def profile(request):
 	if request.user.is_authenticated():
@@ -14,9 +14,13 @@ def profile(request):
 			profiledata=get_object_or_404(ProfileData,user=request.user)
 		except(Http404):
 			return HttpResponseRedirect('./complete')
-		return render(request,'logapp/profile.html',{'profile':profiledata})
+		try:
+			uploads=get_object_or_404(Uploads,user=request.user)
+		except(Http404):
+			return render(request,'logapp/profile.html',{'profile':profiledata})
+		return render(request,'logapp/profile.html',{'profile':profiledata,'uploads':uploads})
 	else:
-		request.session['state']="Please Log In below"
+		#request.session['state']="Please Log In below"
 		username=''
 		if(request.method=="POST"):
 			username=request.POST.get('username')
@@ -31,8 +35,11 @@ def profile(request):
 						profiledata=get_object_or_404(ProfileData,user=request.user)
 					except(Http404):
 						return HttpResponseRedirect('./complete')
-									
-					return render(request,'logapp/profile.html',{'profile':profiledata})
+					try:
+						uploads=get_object_or_404(Uploads,user=request.user)
+					except(Http404):
+						return render(request,'logapp/profile.html',{'profile':profiledata})
+					return render(request,'logapp/profile.html',{'profile':profiledata,'uploads':uploads})
 				else:
 					request.session['state']="Your account is not active"
 			else:

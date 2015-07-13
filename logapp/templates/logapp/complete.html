@@ -56,6 +56,8 @@ COMPLETE YOUR PROFILE
 		</td><td id="input">
 		{{ form.enrollment }}
 		<span id="req"> *</span><br>
+		</td><td>
+		{{ form.enrollment.error }}
 		</td></tr>
 
 		<tr><td>
@@ -63,12 +65,16 @@ COMPLETE YOUR PROFILE
 		</td><td id="input">
 		{{ form.branch }}
 		<span id="req"> *</span><br>
+		</td><td>
+		{{ form.branch.error }}
 		</td></tr>
 
 		<tr><td>
 		Gender :
 		</td><td>
 		{{ form.gender }}
+		</td><td>
+		{{ form.gender.error }}
 		</td></tr>
 
 		<tr><td>
@@ -76,6 +82,8 @@ COMPLETE YOUR PROFILE
 		</td><td id="input">
 		{{ form.dob }}
 		<span id="req"> *</span><br>
+		</td><td>
+		{{ form.dob.error }}
 		</td></tr>
 
 		
@@ -84,6 +92,8 @@ COMPLETE YOUR PROFILE
 		</td><td id="input">
 		{{ form.contact }}
 		<span id="req"> *</span><br>
+		</td><td>
+		{{ form.contact.error }}
 		</td></tr>
 
 		<tr><td>
@@ -91,6 +101,8 @@ COMPLETE YOUR PROFILE
 		</td><td id="input">
 		{{ form.address }}
 		<span id="req"> *</span><br>
+		</td><td>
+		{{ form.address.error }}
 		</td></tr>
 
 		<tr><td>
@@ -98,6 +110,8 @@ COMPLETE YOUR PROFILE
 		</td><td id="input">
 		{{ form.about }}
 		<span id="req"> *</span><br>
+		</td><td>
+		{{ form.about.error }}
 		</td></tr>
 
 		<tr><td style="left:50%;">

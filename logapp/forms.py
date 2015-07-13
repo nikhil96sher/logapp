@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
-from logapp.models import ProfileData
+from logapp.models import ProfileData,Uploads
 class UserForm(ModelForm):
 	class Meta:
 		model= User
@@ -15,4 +15,10 @@ class ProfileForm(ModelForm):
 		fields=('branch','enrollment','gender','dob','contact','address','about')
 		widgets={'gender':forms.RadioSelect(),'dob':SelectDateWidget(years=range(1980,2000)),'about':forms.Textarea}
 		#dob=forms.DateField()
-		#error_messages = { 'enrollment':{'length':("THE ENROLLMENT NO. SHOULD BE OF 8 DIGITS")} }	
+		#error_messages = { 'enrollment':{'length':("THE ENROLLMENT NO. SHOULD BE OF 8 DIGITS")} }
+
+class ImageUploadForm(forms.Form):
+	image=forms.ImageField()
+
+class Image2UploadForm(forms.Form):
+	image2=forms.ImageField()

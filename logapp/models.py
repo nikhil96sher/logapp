@@ -12,3 +12,7 @@ class ProfileData(models.Model):
 	address=models.CharField(max_length=200)
 	about=models.CharField(max_length=300)
 
+class Uploads(models.Model):
+	user=models.OneToOneField(User)
+	cover=models.ImageField(upload_to='./cover/',default='/media/cover/default_cover.jpg')
+	profile=models.ImageField(upload_to='./profile/',default='/media/profile/default_profile.jpg')

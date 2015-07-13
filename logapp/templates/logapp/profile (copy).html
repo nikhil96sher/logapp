@@ -24,7 +24,7 @@
 		<div id="user">
 
 			<div id="username">
-			<b id="usernameb">Welcome,<br/>
+			<b id="usernameb	">	Welcome,<br/>
 			{{ request.session.username }}
 			</b>
 
@@ -63,37 +63,20 @@
 			{% endif %}
 		</div>
 
-		<div id="mycover">
-		
-		<img src="/media/{{ uploads.cover }}" style="height:272px;width:97.5%;">
-		
-		<div id="changecover">
-		<form action="./upload/coverpicture/" method="POST" enctype="multipart/form-data">
+		<div id="cover">
+		<form action="./upload/cover/" action="POST" enctype="multipart/form-data">
 		{% csrf_token %}
-			<input id="id_image" type="file" name="image">
-			<button type="submit"style="height:20px;border-radius:5px;">
-			UPLOAD
+			<input type="file">
+			<button type="submit">
+				UPLOAD
 			</button>
 		</form>
-		</div>
-		
 		</div>
 
 		<div id="profile">
-		<img src="/media/{{ uploads.profile }}" style="height:173px;width:87%;">
-		
 		</div>
 		
 		<div id="details">
-		<div id="changeprofile">
-		<form action="./upload/profilepicture/" method="POST" enctype="multipart/form-data">
-		{% csrf_token %}
-			<input id="id_image2" type="file" name="image2">
-			<button type="submit" style="height:20px;border-radius:5px;">
-			UPLOAD
-			</button>
-		</form>
-		</div>
 		<b>Name : </b>{{ request.user.first_name }} {{ request.user.last_name }}
 		<BR/>
 		<b>Branch : </b>{{ profile.branch }}

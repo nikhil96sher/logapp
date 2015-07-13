@@ -21,11 +21,9 @@ SECRET_KEY = 'jxhv6sn8p9xjz6x22^15q55x4!z+ljan+1udwxi6h8$5pv_4m%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -97,3 +95,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 'django.core.context_processors.i18n',
 'django.core.context_processors.media',
 )
+
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+MEDIA_URL='/media/'
+
+
