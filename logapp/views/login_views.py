@@ -9,19 +9,20 @@ from logapp.forms import ProfileForm
 
 def welcome(request):
 	if request.user.is_authenticated():
-		request.session['username']=request.user.username
-		return HttpResponseRedirect('../profile/')
-	return render(request,'logapp/welcome.html',)
-
-def log_in(request):
-	if request.user.is_authenticated():
-		request.session['username']=request.user.username
-		return HttpResponseRedirect('../profile/')
-		#return render(request,'logapp/profile.html',)
-	else:
-		messages.add_message(request,messages.INFO,'Please Log In Below')
-		#request.session['state']="Please Log In Below"
-		return render(request,'logapp/login.html',)
+		request.session['username']=request.user.username;
+		return HttpResponseRedirect('../profile')
+	elif request.method=="POST":
+		signupform=UserForm(request.POST)
+		if signupform.is_valid():
+			new_user=User.objects.create_user(**signupform.cleaned_data)
+			new_user.backend='django.contib.auth.backends.ModelBackend'
+			messages.add_message(request,messages.SUCCESS,'Registration Successful !!')
+			return HttpResponseRedirect('../welcome')
+		else:
+			return render(request,'logapp/welcome.html',{'form':signupform})	
+ 	else:
+		signupform=UserForm()
+		return render(request,'logapp/welcome.html',{'form':signupform})
 
 def log_out(request):
 	logout(request)

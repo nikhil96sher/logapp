@@ -1,0 +1,113 @@
+#title
+{
+position: relative;
+width:100%;
+height: 80px;
+padding: 25px;
+text-align:center;
+border: double;
+font-weight: bold;
+}
+
+#comp_profile {
+position: relative;
+top: 0px;	
+height: 100%;
+display: inline-block;
+padding-top: 0px;
+}
+
+td
+{
+text-align:left; 	
+padding:8px;
+min-width:200px;
+font-weight: bold;
+}
+
+#req
+{
+	font-color:red;
+}
+
+#id_contact
+{
+text-align:left; 	
+padding:5px;
+min-width:250px;
+font-weight: bold;
+}
+
+
+#id_enrollment
+{
+text-align:left; 	
+padding:p5x;
+min-width:250px;
+font-weight: bold;
+}
+
+
+#id_about
+{
+text-align:left; 	
+padding:8px;
+min-width:250px;
+font-weight: bold;
+}
+
+
+#id_address
+{
+text-align:left; 	
+padding:8px;
+min-width:250px;
+font-weight: bold;
+}
+
+
+#id_branch
+{
+text-align:left; 	
+padding:5px;
+min-width:240px;
+font-weight: bold;
+border-radius:10px ; 
+}
+
+
+#id_dob_month
+{
+text-align:left; 	
+padding:8px;
+min-width:100px;
+font-weight: bold;
+
+border-radius:10px ; 
+}
+
+
+#id_dob_day
+{
+text-align:left; 	
+padding:8px;
+min-width:55px;
+font-weight: bold;
+border-radius:10px ; 
+}
+
+#id_dob_year
+{
+text-align:left; 	
+padding:8px;
+min-width:75px;
+font-weight: bold;
+
+border-radius:10px ; 
+}
+
+button
+{
+border-radius:10px ; 
+height:30px;
+}

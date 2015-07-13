@@ -1,12 +1,148 @@
 <html>
 <head>
+
+
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/header.css">
+<link rel="stylesheet" type="text/css" href="/static/logapp/css/welcome.css">
+
+<title>
+Log In
+</title>
+
+
 </head>
+
 <body>
-<a href="../login">"Login Now"</a>
+
+<header>	
+    	<div id="logo" style="">
+        <a href="../welcome">
+        <img src="/static/logapp/images/logo.gif" alt="logo"/>
+		</a>
+		</div>
+        
+		<div id="head">
+		<h1>@ :: WELCOME TO NIKHIL's NETWORK :: @</h1>
+		</div>
+		
+		<div id="logo" style="">
+        <a href="../welcome">
+        <img src="/static/logapp/images/logo.gif" alt="logo"/>
+		</a>
+		</div>
+        
+</header>
+	
+<div id="content">
 <br/>
-<a href="../signup">"Sign Up"</a>
+<div id="notice">	
+{% if messages %}
+	{% for message in messages %}
+		<p {% if message.tags %} class="{{ message.tags }}"{% endif %} >
+			{{ message }}
+		</p>
+		
+	{% endfor %}
+{% endif %}
+</div>
+
+<br/>
+<div id="intermediateparent">
+<div id="loginblock">
+
+<form action="../profile/" method="POST">
+{% csrf_token %}
+
+<table id="login">
+
+<tr><td colspan="2">
+ALREADY REGISTERED, LOGIN HERE
+</td></tr>
+<tr><td>
+Username
+</td><td>
+<input type=text name='username' id='theusername'></input>
+</td></tr>
+
+<tr><td>
+Password
+</td><td> 
+<input type=password name='password' id='thepassword'></input>
+</td></tr>
+
+<tr><td id="submitb" colspan="2">
+<button type="submit">LOG IN</button>
+</td></tr>
+
+</table>
+
+</form>
+
+</div>
 
 
-</body>
+<div id="signupblock">
 
+<form action='./' method="POST">
+
+{% csrf_token %}
+
+<table>
+
+<tr>
+<td colspan="2">
+REGISTER NOW
+</td>
+</tr>
+
+<tr><td>
+First Name
+</td><td>
+{{ form.first_name }}
+</td></tr>
+
+<tr><td>
+Last Name
+</td><td>
+{{ form.last_name }}
+</td></tr>
+
+<tr><td>
+Username
+</td><td>
+{{ form.username }}
+</td></tr>
+
+<tr><td>
+Password
+</td><td>
+{{ form.password }}
+</td></tr>
+
+<tr><td>
+E-mail
+</td><td>
+{{ form.email }}
+</td></tr>
+
+<tr><td colspan="2">
+<button type="submit">
+	SIGN UP
+</button>
+</td>
+</tr>
+</table>
+
+</div>
+
+</form>
+
+</div>
+
+
+<div id="footer">
+	<h3> &copy Copyright | 2015</h3>
+	</div>
+<body>
 </html>

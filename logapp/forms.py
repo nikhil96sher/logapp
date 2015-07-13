@@ -12,7 +12,7 @@ class UserForm(ModelForm):
 class ProfileForm(ModelForm):
 	class Meta:
 		model=ProfileData
-		fields=('branch','enrollment','gender','dob','email','contact','address','about')
+		fields=('branch','enrollment','gender','dob','contact','address','about')
 		widgets={'gender':forms.RadioSelect(),'dob':SelectDateWidget(years=range(1980,2000)),'about':forms.Textarea}
 		#dob=forms.DateField()
 		#error_messages = { 'enrollment':{'length':("THE ENROLLMENT NO. SHOULD BE OF 8 DIGITS")} }	

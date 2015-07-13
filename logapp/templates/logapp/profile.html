@@ -49,15 +49,15 @@
 
 		<div id="title">
 			<h3>WELCOME TO YOUR PROFILE PAGE</h3>
-				</div>
+		</div>
 		
 		<div id="notice">
 			{% if messages %}
 				<ul class="messages">
 			    	    {% for message in messages %}
-			        	        <li {% if message.tags %} class="{{ message.tags }}"{% endif %} >
+			        	        <p {% if message.tags %} class="{{ message.tags }}"{% endif %} >
 			            	            {{ message }}
-			                	</li>
+			                	</p>
 			        	{% endfor %}
 				</ul>
 			{% endif %}
@@ -92,7 +92,7 @@
 		<div id="contact">
 		<b><u>Contact Details</u><br/>
 		</b>
-		<b>Email-Id : </b>{{ profile.email }}
+		<b>Email-Id : </b>{{ request.user.email }}
 		<BR/>
 		<b>Mobile No. : </b>{{ profile.contact }}
 		<BR/>
