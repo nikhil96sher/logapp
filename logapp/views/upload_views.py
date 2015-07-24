@@ -19,10 +19,13 @@ def upload_cover(request):
 					messages.add_message(request,messages.SUCCESS,"Cover Picture Successfully Updated")
             				return HttpResponseRedirect("../../../profile/")
            	 		except(Http404):
-					messages.add_message(request,messages.ERROR,"Uploads Object not found")
+					m = Uploads.objects.create(user=request.user)
+					m.cover= form.cleaned_data['image']
+					m.save()
+					messages.add_message(request,messages.SUCCESS,"Cover Picture Successfully Updated")
             				return HttpResponseRedirect("../../../profile")
 			else:
-				message.add_message(request,messages.ERROR,"Couldn't upload file now, Please try later")
+				messages.add_message(request,messages.ERROR,"Invalid file type, Please upload an image")
 				return HttpResponseRedirect("../../../profile")
 		else:
 			return HttpResponseRedirect("../../../welcome")
@@ -41,7 +44,10 @@ def upload_profile(request):
 					messages.add_message(request,messages.SUCCESS,"Profile Picture Successfully Updated")
             				return HttpResponseRedirect("../../../profile/")
            	 		except(Http404):
-					messages.add_message(request,messages.ERROR,"Uploads Object not found")
+					m = Uploads.objects.create(user=request.user)
+					m.cover= form.cleaned_data['image']
+					m.save()
+					messages.add_message(request,messages.SUCCESS,"Profile Picture Successfully Updated")
             				return HttpResponseRedirect("../../../profile")
 			else:
 				messages.add_message(request,message.ERROR,"Couldn't upload file now, Please try later")

@@ -17,7 +17,8 @@ def profile(request):
 		try:
 			uploads=get_object_or_404(Uploads,user=request.user)
 		except(Http404):
-			return render(request,'logapp/profile.html',{'profile':profiledata})
+			uploads=Uploads.objects.create(user=request.user)
+			#return render(request,'logapp/profile.html',{'profile':profiledata})
 		return render(request,'logapp/profile.html',{'profile':profiledata,'uploads':uploads})
 	else:
 		#request.session['state']="Please Log In below"
