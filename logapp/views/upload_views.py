@@ -45,7 +45,7 @@ def upload_profile(request):
             				return HttpResponseRedirect("../../../profile/")
            	 		except(Http404):
 					m = Uploads.objects.create(user=request.user)
-					m.cover= form.cleaned_data['image']
+					m.profile= form.cleaned_data['image2']
 					m.save()
 					messages.add_message(request,messages.SUCCESS,"Profile Picture Successfully Updated")
             				return HttpResponseRedirect("../../../profile")
